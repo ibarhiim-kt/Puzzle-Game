@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Puzzle Game</title>
+</head>
+<body>
+
+<div id="parent">
+    <div id="container1">
+        <div id="child1">
+            <h1>Puzzle Game</h1>
+            <p id="time" class="para">30</p>
+            <!-- <p id="tryAgain" class="para">Try Again</p> -->
+            <button id="tryAgain" class="para">Try Again</button>
+        </div>
+        <div id="child2">
+            <div id="row1" class="rows">
+                <div id="box1" class="rowsChild" draggable="true"
+                ondragstart="drag(event)" ondragover="allowDrop(event)"
+                ondrop="drop(event)"></div>
+
+                <div id="box2" class="rowsChild" draggable="true" 
+                ondragstart="drag(event)" ondragover="allowDrop(event)"
+                 ondrop="drop(event)"></div>
+
+                <div id="box3" class="rowsChild" draggable="true"
+                ondragstart="drag(event)" ondragover="allowDrop(event)"
+                ondrop="drop(event)"></div>
+            </div>
+            <div id="row2" class="rows">
+                <div id="box4" class="rowsChild" draggable="true"
+                ondragstart="drag(event)" ondragover="allowDrop(event)"
+                ondrop="drop(event)"></div>
+                <div id="box5" class="rowsChild" draggable="true"
+                ondragstart="drag(event)" ondragover="allowDrop(event)"
+                ondrop="drop(event)"></div>
+                <div id="box6" class="rowsChild" draggable="true"
+                ondragstart="drag(event)" ondragover="allowDrop(event)"
+                ondrop="drop(event)"></div>
+            </div>
+            <div id="row3" class="rows">
+                <div id="box7" class="rowsChild" draggable="true"
+                ondragstart="drag(event)" ondragover="allowDrop(event)"
+                ondrop="drop(event)"></div>
+                <div id="box8" class="rowsChild" draggable="true"
+                ondragstart="drag(event)" ondragover="allowDrop(event)"
+                ondrop="drop(event)"></div>
+                <div id="box9" class="rowsChild" draggable="true"
+                ondragstart="drag(event)" ondragover="allowDrop(event)"
+                ondrop="drop(event)"></div>
+            </div>
+            <div id="row4" class="rows">
+                <div id="box10" class="rowsChild" draggable="true"
+                ondragstart="drag(event)" ondragover="allowDrop(event)"
+                ondrop="drop(event)"></div>
+                <div id="box11" class="rowsChild" draggable="true"
+                ondragstart="drag(event)" ondragover="allowDrop(event)"
+                ondrop="drop(event)"></div>
+                <div id="box12" class="rowsChild" draggable="true"
+                ondragstart="drag(event)" ondragover="allowDrop(event)"
+                ondrop="drop(event)"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="container2">
+        <h2>High Scores</h2>
+        <h4 id="highScore"></h4>
+    </div>
+</div>
+<script>
+
+    function drag(event){
+        event.dataTransfer.setData("text",event.target.id);
+    }
+    function allowDrop(event){
+        event.preventDefault();
+    }
+    function drop(event){
+        event.preventDefault();
+        var data = event.dataTransfer.getData("text");
+        var draggedBox = document.getElementById(data);
+        var targetBox = event.target;
+        var temp = targetBox.innerText;
+        targetBox.innerText = draggedBox.innerText;
+        draggedBox.innerText = temp;
+
+        // var inOrder = true;
+        // var previousValue = 0;
+        // for (var i = 1; i <= 12; i++) {
+        //     var box = document.getElementById('box' + i);
+        //     var boxValue = parseInt(box.innerText);
+        //     if (boxValue !== i) {
+        //         inOrder = false;
+        //         break;
+        //     }
+        //     previousValue = boxValue;
+        // }
+
+        
+        // if (inOrder) {
+        //     clearInterval(countdown);
+        //     var bestScore = document.getElementById('time').innerHTML;
+        //     document.getElementById('highScore').innerHTML = "High Score: " + bestScore;
+        // }
+        // checkOrder();
+
+    }
+    function checkOrder(){
+        const box1 =parseInt(document.getElementById("box1").innerHTML);
+        const box2 =parseInt(document.getElementById("box2").innerHTML);
+        const box3 =parseInt(document.getElementById("box3").innerHTML);
+        const box4 =parseInt(document.getElementById("box4").innerHTML);
+        const box5 =parseInt(document.getElementById("box5").innerHTML);
+        const box6 =parseInt(document.getElementById("box6").innerHTML);
+        const box7 =parseInt(document.getElementById("box7").innerHTML);
+        const box8 =parseInt(document.getElementById("box8").innerHTML);
+        const box9 =parseInt(document.getElementById("box9").innerHTML);
+        const box10 =parseInt(document.getElementById("box10").innerHTML);
+        const box11 =parseInt(document.getElementById("box11").innerHTML);
+        const box12=parseInt(document.getElementById("box12").innerHTML);
+        
+        
+    if(box1 < box2 && box2 <box3 && box3 < box4 && box4<box5 && box6<box7 && box7<box8 && box8<box9 && box9<box10 && box10<box11 && box11<box12){
+        clearInterval(countdown);
+        const bestScore = document.getElementById("time").innerHTML;
+        document.getElementById('highScore').innerHTML = "High Score: " + bestScore;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+    }
+
+    function giveRandomNumber(usedNumbers) {
+        var randomNumber;
+        do {
+            randomNumber = Math.floor(Math.random() * 12) + 1;
+        } while (usedNumbers.includes(randomNumber));
+        usedNumbers.push(randomNumber);
+        return randomNumber;
+    }
+    window.onload = function() {
+        var usedNumbers = [];
+
+        
+    document.getElementById("box1").innerHTML = giveRandomNumber(usedNumbers);
+    document.getElementById("box2").innerHTML = giveRandomNumber(usedNumbers);
+    document.getElementById("box3").innerHTML = giveRandomNumber(usedNumbers);
+    document.getElementById("box4").innerHTML = giveRandomNumber(usedNumbers);
+    document.getElementById("box5").innerHTML = giveRandomNumber(usedNumbers);
+    document.getElementById("box6").innerHTML = giveRandomNumber(usedNumbers);
+    document.getElementById("box7").innerHTML = giveRandomNumber(usedNumbers);
+    document.getElementById("box8").innerHTML = giveRandomNumber(usedNumbers);
+    document.getElementById("box9").innerHTML = giveRandomNumber(usedNumbers);
+    document.getElementById("box10").innerHTML = giveRandomNumber(usedNumbers);
+    document.getElementById("box11").innerHTML = giveRandomNumber(usedNumbers);
+    document.getElementById("box12").innerHTML = giveRandomNumber(usedNumbers);
+    
+
+   var timer = document.getElementById("time");
+   var totalTime = 30;
+   var countdown = setInterval(function(){
+    if(totalTime<=0){
+        clearInterval(countdown);
+        timer.innerHTML = "time's up";
+    }
+    else
+    {
+        timer.innerHTML = totalTime;
+        totalTime--;
+    }
+},1000);
+
+   
+};
+</script>
+</body>
+
+</html>
