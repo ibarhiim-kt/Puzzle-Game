@@ -86,6 +86,10 @@ body{
     text-align: center;
     padding-top: 20px;
 }
+.rowsChild :hover(){
+    color: red;
+    background-color: grey;
+}
 
 #container2{
     height: 40%;

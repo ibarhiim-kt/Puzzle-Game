@@ -13,7 +13,7 @@
         <div id="child1">
             <h1>Puzzle Game</h1>
             <p id="time" class="para">30</p>
-            <button id="tryAgain" class="para" >Try Again</button>
+            <button id="resetButton" class="para" >Try Again</button>
         </div>
         <div id="child2">
             <div id="row1" class="rows">
@@ -73,6 +73,39 @@
     </div>
 </div>
 <script>
+const tryAgainButton = document.getElementById("resetButton");
+const buttons = document.querySelector(".rowsChild");
+var timer = document.getElementById("time");
+var timeInterval;
+var usedNumbers = [];
+function resetGame(){
+    
+    
+    clearInterval(timeInterval);
+
+
+    timer.innerHTML = "30";    
+    
+    
+    startTimer();
+    usedNumbers = [];
+
+        
+    document.getElementById("box1").innerHTML = giveRandomNumber(usedNumbers);
+    document.getElementById("box2").innerHTML = giveRandomNumber(usedNumbers);
+    document.getElementById("box3").innerHTML = giveRandomNumber(usedNumbers);
+    document.getElementById("box4").innerHTML = giveRandomNumber(usedNumbers);
+    document.getElementById("box5").innerHTML = giveRandomNumber(usedNumbers);
+    document.getElementById("box6").innerHTML = giveRandomNumber(usedNumbers);
+    document.getElementById("box7").innerHTML = giveRandomNumber(usedNumbers);
+    document.getElementById("box8").innerHTML = giveRandomNumber(usedNumbers);
+    document.getElementById("box9").innerHTML = giveRandomNumber(usedNumbers);
+    document.getElementById("box10").innerHTML = giveRandomNumber(usedNumbers);
+    document.getElementById("box11").innerHTML = giveRandomNumber(usedNumbers);
+    document.getElementById("box12").innerHTML = giveRandomNumber(usedNumbers);
+    
+}
+tryAgainButton.addEventListener("click",resetGame);
 
     function drag(event){
         event.dataTransfer.setData("text",event.target.id);
@@ -101,7 +134,7 @@
         return randomNumber;
     }
     window.onload = function() {
-        var usedNumbers = [];
+         usedNumbers = [];
 
         
     document.getElementById("box1").innerHTML = giveRandomNumber(usedNumbers);
@@ -132,9 +165,10 @@ function checkAscendingOrder(numbers){
     return true;
 }
 function startTimer(){
-    var timer = document.getElementById("time");
+    
+    
    var seconds = 30;
-   var timeInterval = setInterval(()=>{
+    timeInterval = setInterval(()=>{
     seconds--;
     if(seconds===0){
         clearInterval(timeInterval);
@@ -158,8 +192,8 @@ function startTimer(){
     
 },1000);
 }
-document.getElementById("tryAgain").addEventListener("click",function(){
-    console.log("hfleajflfjsalk");
+document.getElementById("resetButton").addEventListener("click",function(){
+    alert("welcome");
 });
 </script>
 </body>
